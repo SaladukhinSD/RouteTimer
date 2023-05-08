@@ -63,13 +63,15 @@ namespace RouteTimer
             internal string numberRoute;
             internal string nameRoute;
             internal string directionRoute;
+            internal string distanceAboutBusStop;
             internal string kindOfTransport;
             internal string allTime;
-            public Route(string number, string name, string direction, string transport, string time)
+            public Route(string number, string name, string direction,string distance, string transport, string time)
             {
                 numberRoute = number;
                 nameRoute = name;
                 directionRoute = direction;
+                distanceAboutBusStop = distance;
                 kindOfTransport = transport;
                 allTime = time;
             }
@@ -148,8 +150,9 @@ namespace RouteTimer
             this.Set("A", row, newRoute.numberRoute);
             this.Set("B", row, newRoute.nameRoute);
             this.Set("C", row, newRoute.directionRoute);
-            this.Set("D", row, newRoute.kindOfTransport);
-            this.Set("E", row, newRoute.allTime);
+            this.Set("D", row, newRoute.distanceAboutBusStop);
+            this.Set("E", row, newRoute.kindOfTransport);
+            this.Set("F", row, newRoute.allTime);
         }
 
         internal void DeliteRoute(string numberRoute)
@@ -160,6 +163,7 @@ namespace RouteTimer
             this.Set("C", row, "");
             this.Set("D", row, "");
             this.Set("E", row, "");
+            this.Set("F", row, "");
         }
 
         internal Route DataRoute(string numberRoute)
@@ -168,9 +172,10 @@ namespace RouteTimer
             string dataAboutNumber = this.Get("A", row);
             string dataAboutName = this.Get("B", row);
             string dataAboutDistring = this.Get("C", row);
-            string dataAboutTransport = this.Get("D", row);
-            string dataAboutTime = this.Get("E", row);
-            Route allData = new Route(dataAboutNumber,dataAboutName,dataAboutDistring, dataAboutTransport, dataAboutTime);
+            string dataAboutDistance = this.Get("D", row);
+            string dataAboutTransport = this.Get("E", row);
+            string dataAboutTime = this.Get("F", row);
+            Route allData = new Route(dataAboutNumber,dataAboutName,dataAboutDistring, dataAboutDistance, dataAboutTransport, dataAboutTime);
 
             return allData;
         }
@@ -178,7 +183,7 @@ namespace RouteTimer
         internal string[] DataAboutRoute(string numberRoute)
         {
             Route serchRoute = this.DataRoute(numberRoute);
-            string[] dataAboutRoute = new string[] {serchRoute.numberRoute,serchRoute.nameRoute, serchRoute.directionRoute, serchRoute.kindOfTransport, serchRoute.allTime };
+            string[] dataAboutRoute = new string[] {serchRoute.numberRoute,serchRoute.nameRoute, serchRoute.directionRoute, serchRoute.distanceAboutBusStop, serchRoute.kindOfTransport, serchRoute.allTime };
             return dataAboutRoute;
         }
 
@@ -186,7 +191,8 @@ namespace RouteTimer
         {
             Route allData = this.DataRoute(numberRoute);
             string AllDataAboutRoute = $"Number: {allData.numberRoute} \r\nName: {allData.nameRoute} \r\n" +
-                $"Distring: {allData.directionRoute} \r\nKind of Transport: {allData.kindOfTransport} \r\nDeparture time: {allData.allTime}";
+                $"Distring: {allData.directionRoute} \r\nDistance about bus stop: {allData.distanceAboutBusStop} \r\n" +
+                $"Kind of Transport: {allData.kindOfTransport} \r\nDeparture time: {allData.allTime}";
             return AllDataAboutRoute;
         }
 
@@ -197,6 +203,7 @@ namespace RouteTimer
             this.Set("C", row, dataAboutRoute[2]);
             this.Set("D", row, dataAboutRoute[3]);
             this.Set("E", row, dataAboutRoute[4]);
+            this.Set("F", row, dataAboutRoute[5]);
         }
 
         internal object[] AllNumbersRoute()
@@ -221,17 +228,53 @@ namespace RouteTimer
             return dataAllNumbers;
         }
 
-        internal List<string> TransformationTime(string time)
+        internal TimeSpan TimeBeforeBusStop(TimeSpan timeBeforeDepartureBusStop)
         {
-            List<string> timesAboutRoute = new List<string> { };
-            foreach (char oneChar in time)
-            {
-                if (oneChar == ':')
-                { 
-                    
-                }
-            }
-            return timesAboutRoute;
+            double speedUser = Convert.ToDouble(this.Get("A", 2));
+            double minutesSpeedUser = Convert.ToDouble(this.Get("B", 2)); 
+            double distanceUser = Convert.ToDouble(this.Get("C", 2));
+            if (speedUser == 0)
+                speedUser = distanceUser/minutesSpeedUser;
+            double distance = 1000.0;//переделать нформацию об автобусе и брать у каждой останкий свою дистанцию
+            int minutesOvercomingDistance = Convert.ToInt32( distance/speedUser);
+
+            timeBeforeDepartureBusStop = timeBeforeDepartureBusStop - new TimeSpan(0,minutesOvercomingDistance,0);
+            return timeBeforeDepartureBusStop;
+        }
+
+        internal string OutputInformationAboutTime(TimeSpan firstTime, TimeSpan secondTime)
+        {
+            string outputInformtion;
+            if (firstTime.Minutes < 10)
+                outputInformtion = firstTime.Hours.ToString() + ":0" + firstTime.Minutes.ToString();
+            else
+                outputInformtion = firstTime.Hours.ToString() + ":" + firstTime.Minutes.ToString();
+            if (secondTime.Minutes < 10)
+                outputInformtion += "; " + secondTime.Hours.ToString() + ":0" + secondTime.Minutes.ToString();
+            else
+                outputInformtion += "; " + secondTime.Hours.ToString() + ":" + secondTime.Minutes.ToString();
+            return outputInformtion;
+        }
+
+        internal string MinutesBeforeDeparture(DateTime firstTime, DateTime secondTime)
+        {
+            string timeBeforeDeparture;
+            DateTime timeNow = DateTime.Now;
+            TimeSpan timeZero = new TimeSpan(0, 0, 0);
+            TimeSpan firstTimeSpan = firstTime.Subtract(timeNow);
+            if(firstTimeSpan < timeZero)
+                firstTimeSpan = new TimeSpan(24,00,00) + firstTimeSpan;
+
+            TimeSpan secondTimeSpan = secondTime.Subtract(timeNow);
+            if (secondTimeSpan < timeZero)
+                secondTimeSpan = new TimeSpan(24, 00, 00) + secondTimeSpan;
+
+            firstTimeSpan = TimeBeforeBusStop(firstTimeSpan);
+            secondTimeSpan = TimeBeforeBusStop(secondTimeSpan);
+
+            timeBeforeDeparture = OutputInformationAboutTime(firstTimeSpan,secondTimeSpan);
+            
+            return timeBeforeDeparture;
         }
 
         internal object[] AllData()
@@ -270,7 +313,7 @@ namespace RouteTimer
                             }
                             else
                                 secondTimeRoute= Convert.ToDateTime(timeRoute.Substring(0, 5));
-                            data.allTime = firstTimeRoute.ToShortTimeString() + "; " + secondTimeRoute.ToShortTimeString();
+                            data.allTime = this.MinutesBeforeDeparture(firstTimeRoute, secondTimeRoute);
                             break;
                         }
 
@@ -281,10 +324,9 @@ namespace RouteTimer
                 {
                     firstTimeRoute = Convert.ToDateTime(timeRoute.Substring(0, 5));
                     secondTimeRoute = Convert.ToDateTime(timeRoute.Substring(7,5));
-                    data.allTime = firstTimeRoute.ToShortTimeString() + "; " +  secondTimeRoute.ToShortTimeString();
+                    data.allTime = this.MinutesBeforeDeparture(firstTimeRoute, secondTimeRoute);
                 }
-                stringTimes [filledArraayElement] = data.numberRoute + "\t " + data.nameRoute + "\t" + data.directionRoute + "\t " + 
-                    data.kindOfTransport + " \t" + data.allTime;
+                stringTimes [filledArraayElement] = data.numberRoute + "\t " + data.nameRoute + " \t" + data.allTime;
                 filledArraayElement++;
             }
             return stringTimes; 

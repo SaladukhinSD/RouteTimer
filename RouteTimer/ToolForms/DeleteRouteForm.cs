@@ -17,11 +17,15 @@ namespace RouteTimer
         public DeleteRouteForm()
         {
             InitializeComponent();
+
             using (ExcelHelper helper = new ExcelHelper())
             {
-                object[] dataAllNumbers = helper.AllNumbersRoute();
+                if (helper.Open(filePath: Path.Combine(Environment.CurrentDirectory, "DataRouts.xlsx")))
+                {
+                    object[] dataAllNumbers = helper.AllNumbersRoute();
 
-                comboBoxNumberRoute.Items.AddRange(dataAllNumbers);
+                    comboBoxNumberRoute.Items.AddRange(dataAllNumbers);
+                }
             }
 
         }

@@ -38,19 +38,21 @@
             // 
             // listBoxSchedule
             // 
-            this.listBoxSchedule.Font = new System.Drawing.Font("Palatino Linotype", 16F);
+            this.listBoxSchedule.Dock = System.Windows.Forms.DockStyle.Left;
+            this.listBoxSchedule.Font = new System.Drawing.Font("Palatino Linotype", 14F);
             this.listBoxSchedule.FormattingEnabled = true;
             this.listBoxSchedule.HorizontalScrollbar = true;
-            this.listBoxSchedule.ItemHeight = 28;
-            this.listBoxSchedule.Location = new System.Drawing.Point(13, 34);
+            this.listBoxSchedule.ItemHeight = 26;
+            this.listBoxSchedule.Location = new System.Drawing.Point(0, 0);
+            this.listBoxSchedule.MaximumSize = new System.Drawing.Size(550, 400);
             this.listBoxSchedule.Name = "listBoxSchedule";
             this.listBoxSchedule.ScrollAlwaysVisible = true;
-            this.listBoxSchedule.Size = new System.Drawing.Size(286, 368);
+            this.listBoxSchedule.Size = new System.Drawing.Size(550, 400);
             this.listBoxSchedule.TabIndex = 0;
             // 
             // buttonAddRoute
             // 
-            this.buttonAddRoute.Location = new System.Drawing.Point(321, 34);
+            this.buttonAddRoute.Location = new System.Drawing.Point(578, 34);
             this.buttonAddRoute.Name = "buttonAddRoute";
             this.buttonAddRoute.Size = new System.Drawing.Size(132, 51);
             this.buttonAddRoute.TabIndex = 1;
@@ -60,7 +62,7 @@
             // 
             // buttonModifyRoute
             // 
-            this.buttonModifyRoute.Location = new System.Drawing.Point(321, 102);
+            this.buttonModifyRoute.Location = new System.Drawing.Point(578, 102);
             this.buttonModifyRoute.Name = "buttonModifyRoute";
             this.buttonModifyRoute.Size = new System.Drawing.Size(132, 51);
             this.buttonModifyRoute.TabIndex = 2;
@@ -70,7 +72,7 @@
             // 
             // buttonDeliteRoute
             // 
-            this.buttonDeliteRoute.Location = new System.Drawing.Point(321, 172);
+            this.buttonDeliteRoute.Location = new System.Drawing.Point(578, 172);
             this.buttonDeliteRoute.Name = "buttonDeliteRoute";
             this.buttonDeliteRoute.Size = new System.Drawing.Size(132, 51);
             this.buttonDeliteRoute.TabIndex = 3;
@@ -80,7 +82,7 @@
             // 
             // buttonInformationRoute
             // 
-            this.buttonInformationRoute.Location = new System.Drawing.Point(321, 242);
+            this.buttonInformationRoute.Location = new System.Drawing.Point(578, 242);
             this.buttonInformationRoute.Name = "buttonInformationRoute";
             this.buttonInformationRoute.Size = new System.Drawing.Size(132, 51);
             this.buttonInformationRoute.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             // buttonUserCharacteristics
             // 
-            this.buttonUserCharacteristics.Location = new System.Drawing.Point(321, 311);
+            this.buttonUserCharacteristics.Location = new System.Drawing.Point(578, 310);
             this.buttonUserCharacteristics.Name = "buttonUserCharacteristics";
             this.buttonUserCharacteristics.Size = new System.Drawing.Size(132, 51);
             this.buttonUserCharacteristics.TabIndex = 5;
@@ -102,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 450);
+            this.ClientSize = new System.Drawing.Size(722, 450);
             this.Controls.Add(this.buttonUserCharacteristics);
             this.Controls.Add(this.buttonInformationRoute);
             this.Controls.Add(this.buttonDeliteRoute);

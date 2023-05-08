@@ -34,6 +34,7 @@
             this.textBoxDirectionRoute = new System.Windows.Forms.TextBox();
             this.textBoxKindOfTransport = new System.Windows.Forms.TextBox();
             this.buttonAddRoute = new System.Windows.Forms.Button();
+            this.textBoxDistanceAboutBusStopRoute = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBoxNumberRoute
@@ -49,7 +50,7 @@
             this.textBoxAllTime.Location = new System.Drawing.Point(285, 35);
             this.textBoxAllTime.Multiline = true;
             this.textBoxAllTime.Name = "textBoxAllTime";
-            this.textBoxAllTime.Size = new System.Drawing.Size(223, 243);
+            this.textBoxAllTime.Size = new System.Drawing.Size(223, 306);
             this.textBoxAllTime.TabIndex = 4;
             // 
             // textBoxNameRoute
@@ -70,7 +71,7 @@
             // 
             // textBoxKindOfTransport
             // 
-            this.textBoxKindOfTransport.Location = new System.Drawing.Point(39, 240);
+            this.textBoxKindOfTransport.Location = new System.Drawing.Point(39, 303);
             this.textBoxKindOfTransport.Multiline = true;
             this.textBoxKindOfTransport.Name = "textBoxKindOfTransport";
             this.textBoxKindOfTransport.Size = new System.Drawing.Size(223, 38);
@@ -78,7 +79,7 @@
             // 
             // buttonAddRoute
             // 
-            this.buttonAddRoute.Location = new System.Drawing.Point(39, 304);
+            this.buttonAddRoute.Location = new System.Drawing.Point(39, 362);
             this.buttonAddRoute.Name = "buttonAddRoute";
             this.buttonAddRoute.Size = new System.Drawing.Size(469, 45);
             this.buttonAddRoute.TabIndex = 8;
@@ -86,11 +87,20 @@
             this.buttonAddRoute.UseVisualStyleBackColor = true;
             this.buttonAddRoute.Click += new System.EventHandler(this.buttonAddRoute_Click);
             // 
+            // textBoxDistanceAboutBusStopRoute
+            // 
+            this.textBoxDistanceAboutBusStopRoute.Location = new System.Drawing.Point(39, 239);
+            this.textBoxDistanceAboutBusStopRoute.Multiline = true;
+            this.textBoxDistanceAboutBusStopRoute.Name = "textBoxDistanceAboutBusStopRoute";
+            this.textBoxDistanceAboutBusStopRoute.Size = new System.Drawing.Size(223, 38);
+            this.textBoxDistanceAboutBusStopRoute.TabIndex = 9;
+            // 
             // AddRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(537, 378);
+            this.ClientSize = new System.Drawing.Size(537, 402);
+            this.Controls.Add(this.textBoxDistanceAboutBusStopRoute);
             this.Controls.Add(this.buttonAddRoute);
             this.Controls.Add(this.textBoxKindOfTransport);
             this.Controls.Add(this.textBoxDirectionRoute);
@@ -112,5 +122,6 @@
         private System.Windows.Forms.TextBox textBoxDirectionRoute;
         private System.Windows.Forms.TextBox textBoxKindOfTransport;
         private System.Windows.Forms.Button buttonAddRoute;
+        private System.Windows.Forms.TextBox textBoxDistanceAboutBusStopRoute;
     }
 }

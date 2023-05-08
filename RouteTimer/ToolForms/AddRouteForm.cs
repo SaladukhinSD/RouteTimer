@@ -22,22 +22,23 @@ namespace RouteTimer
         {
             //добавить подсказки для ввода и тект в окне
 
-            string numberR, nameR, directionR, kindOfTransportR, allTimeR;
+            string numberR, nameR, directionR, distanceR, kindOfTransportR, allTimeR;
             numberR = textBoxNumberRoute.Text.TrimStart('0', ' ');
             numberR = numberR.TrimEnd();
             nameR = textBoxNameRoute.Text.Trim();
             directionR = textBoxDirectionRoute.Text.Trim();
+            distanceR = textBoxDistanceAboutBusStopRoute.Text.Trim();
             kindOfTransportR = textBoxKindOfTransport.Text.Trim();
             allTimeR = textBoxAllTime.Text.Trim(); // добавить проверку на символы
 
-            if(numberR != "" || nameR != "" || directionR != "" || kindOfTransportR != "" || allTimeR != "" )
+            if(numberR != "" || nameR != "" || directionR != "" || distanceR != "" || kindOfTransportR != "" || allTimeR != "" )
             {
                 
                 using (ExcelHelper helper = new ExcelHelper())
                 {
                     if (helper.Open(filePath: Path.Combine(Environment.CurrentDirectory, "DataRouts.xlsx")))
                     {
-                        ExcelHelper.Route newRoute = new ExcelHelper.Route(numberR, nameR, directionR, kindOfTransportR, allTimeR);
+                        ExcelHelper.Route newRoute = new ExcelHelper.Route(numberR, nameR, directionR, distanceR, kindOfTransportR, allTimeR);
 
                         helper.AddRoute(newRoute);
 
