@@ -206,20 +206,20 @@ namespace RouteTimer
             this.Set("F", row, dataAboutRoute[5]);
         }
 
-        internal object[] AllNumbersRoute()
+        internal object[] AllNumbersRoute()                                                                                         //all number routes in the excel table
         {
-            var allNumberRoute = new List<string> { };    //?????????
-            int precentNumberRoute = 4;
+            var allNumberRoute = new List<string> { };    
+            int firstNumberRoute = 4;
             bool numberRouteNotNull = true;
             string numberRoute;
 
             while (numberRouteNotNull)
             {
-                numberRoute =  this.Get("A", precentNumberRoute);
+                numberRoute =  this.Get("A", firstNumberRoute);
                 if (numberRoute != null)
                 {
                     allNumberRoute.Add(numberRoute);
-                    precentNumberRoute++;
+                    firstNumberRoute++;
                 }
                 else numberRouteNotNull= false;
             }
@@ -230,7 +230,7 @@ namespace RouteTimer
 
         
 
-        internal TimeSpan TimeBeforeBusStop(TimeSpan timeBeforeDepartureBusStop, string distanceAboutBusStop)
+        internal TimeSpan TimeBeforeBusStop(TimeSpan timeBeforeDepartureBusStop, string distanceAboutBusStop)                       //calculating time to cover the distance to bus stop. Using speed user and distance to bus stop 
         {
             double speedUser = Convert.ToDouble(this.Get("A", 2));
             if (speedUser == 0)
@@ -260,7 +260,7 @@ namespace RouteTimer
             return outputInformtion;
         }
 
-        internal string MinutesBeforeDeparture(TimeSpan firstTime, TimeSpan secondTime)
+        internal string MinutesBeforeDeparture(TimeSpan firstTime, TimeSpan secondTime)                                             //transformation the time of departure from the bus stop to the time before departure from the bus stop 
         {
             string timeBeforeDeparture;
             DateTime timeNowDate = DateTime.Now;
@@ -290,25 +290,33 @@ namespace RouteTimer
             object[] timeRouts = this.AllNumbersRoute();
             object[] stringTimes = new object[timeRouts.Length];
 
-            //функция по сбору всей иформации всех рейсов
+                                                                                                                                    //функция по сбору иформации всех рейсов
+                                                                                                                                    //function for collecction information routes
+
             foreach (object times in timeRouts)
             {
                 dataAllRouts.Add(this.DataRoute(Convert.ToString(times)));
 
             }
-            //функция по подсчету времени за которое нужно выйти для каждого рейса
+
+                                                                                                                                    //функция по подсчету времени за которое нужно выйти для каждого рейса
+                                                                                                                                    //funciton for times collection about to exit to bus stop
+
             foreach (Route data in dataAllRouts)
             {
 
                 TimeSpan firstTimeRoute = TimeSpan.Zero, secondTimeRoute = TimeSpan.Zero;
                 timeRoute = data.allTime;
-                //цикл по преобразованию строки времени в два значения
+
+                                                                                                                                    //цикл по преобразованию строки времени в два значения
+                                                                                                                                    //cycle for transformation string times to two values 
+
                 for (int i = 0; i < timeRoute.Length; i++)
                 {
 
                     if (timeRoute.Substring(i,1) == ":")
                     {
-                        timeDateHelp = Convert.ToDateTime(timeRoute.Substring(i-2, 5));
+                        timeDateHelp = Convert.ToDateTime(timeRoute.Substring(i-2, 5));                                             //use of departure time from bus stop and time befor to exit to bus stop
                         firstTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
                         firstTimeRoute =  TimeBeforeBusStop(firstTimeRoute, data.distanceAboutBusStop);
 
@@ -327,7 +335,7 @@ namespace RouteTimer
                                 secondTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
                                 secondTimeRoute = TimeBeforeBusStop(secondTimeRoute, data.distanceAboutBusStop);
                             }
-                            data.allTime = this.MinutesBeforeDeparture(firstTimeRoute, secondTimeRoute);
+                            data.allTime = this.MinutesBeforeDeparture(firstTimeRoute, secondTimeRoute);                   
                             break;
                         }
 
