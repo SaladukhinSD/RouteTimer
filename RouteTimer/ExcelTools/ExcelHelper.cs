@@ -228,17 +228,21 @@ namespace RouteTimer
             return dataAllNumbers;
         }
 
-        internal TimeSpan TimeBeforeBusStop(TimeSpan timeBeforeDepartureBusStop)
+        
+
+        internal TimeSpan TimeBeforeBusStop(TimeSpan timeBeforeDepartureBusStop, string distanceAboutBusStop)
         {
             double speedUser = Convert.ToDouble(this.Get("A", 2));
-            double minutesSpeedUser = Convert.ToDouble(this.Get("B", 2)); 
-            double distanceUser = Convert.ToDouble(this.Get("C", 2));
             if (speedUser == 0)
+            {
+                double minutesSpeedUser = Convert.ToDouble(this.Get("B", 2));
+                double distanceUser = Convert.ToDouble(this.Get("C", 2));
                 speedUser = distanceUser/minutesSpeedUser;
-            double distance = 1000.0;//переделать нформацию об автобусе и брать у каждой останкий свою дистанцию
-            int minutesOvercomingDistance = Convert.ToInt32( distance/speedUser);
+            }
 
-            timeBeforeDepartureBusStop = timeBeforeDepartureBusStop - new TimeSpan(0,minutesOvercomingDistance,0);
+            int minutesOvercomingDistance = Convert.ToInt32(Convert.ToDouble(distanceAboutBusStop)/speedUser);
+
+            timeBeforeDepartureBusStop = timeBeforeDepartureBusStop - new TimeSpan(0, minutesOvercomingDistance, 0);
             return timeBeforeDepartureBusStop;
         }
 
@@ -256,10 +260,11 @@ namespace RouteTimer
             return outputInformtion;
         }
 
-        internal string MinutesBeforeDeparture(DateTime firstTime, DateTime secondTime)
+        internal string MinutesBeforeDeparture(TimeSpan firstTime, TimeSpan secondTime)
         {
             string timeBeforeDeparture;
-            DateTime timeNow = DateTime.Now;
+            DateTime timeNowDate = DateTime.Now;
+            TimeSpan timeNow = new TimeSpan(timeNowDate.Hour, timeNowDate.Minute,0);
             TimeSpan timeZero = new TimeSpan(0, 0, 0);
             TimeSpan firstTimeSpan = firstTime.Subtract(timeNow);
             if(firstTimeSpan < timeZero)
@@ -269,8 +274,6 @@ namespace RouteTimer
             if (secondTimeSpan < timeZero)
                 secondTimeSpan = new TimeSpan(24, 00, 00) + secondTimeSpan;
 
-            firstTimeSpan = TimeBeforeBusStop(firstTimeSpan);
-            secondTimeSpan = TimeBeforeBusStop(secondTimeSpan);
 
             timeBeforeDeparture = OutputInformationAboutTime(firstTimeSpan,secondTimeSpan);
             
@@ -279,7 +282,8 @@ namespace RouteTimer
 
         internal object[] AllData()
         {
-            DateTime timeNow = DateTime.Now;
+            DateTime timeDateHelp = DateTime.Now;
+            TimeSpan timeNow = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
             string timeRoute;
             int filledArraayElement = 0;
             List<Route> dataAllRouts = new List<Route>();
@@ -296,7 +300,7 @@ namespace RouteTimer
             foreach (Route data in dataAllRouts)
             {
 
-                DateTime firstTimeRoute = DateTime.MinValue, secondTimeRoute = DateTime.MinValue;
+                TimeSpan firstTimeRoute = TimeSpan.Zero, secondTimeRoute = TimeSpan.Zero;
                 timeRoute = data.allTime;
                 //цикл по преобразованию строки времени в два значения
                 for (int i = 0; i < timeRoute.Length; i++)
@@ -304,15 +308,25 @@ namespace RouteTimer
 
                     if (timeRoute.Substring(i,1) == ":")
                     {
-                        firstTimeRoute = Convert.ToDateTime( timeRoute.Substring(i-2, 5));
+                        timeDateHelp = Convert.ToDateTime(timeRoute.Substring(i-2, 5));
+                        firstTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
+                        firstTimeRoute =  TimeBeforeBusStop(firstTimeRoute, data.distanceAboutBusStop);
+
                         if (firstTimeRoute >= timeNow)
                         {
                             if (i + 8 <= timeRoute.Length)
                             {
-                                secondTimeRoute = Convert.ToDateTime(timeRoute.Substring(i+5, 5));
+                                timeDateHelp = Convert.ToDateTime(timeRoute.Substring(i+5, 5));
+                                secondTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
+                                secondTimeRoute = TimeBeforeBusStop(secondTimeRoute, data.distanceAboutBusStop);
+
                             }
                             else
-                                secondTimeRoute= Convert.ToDateTime(timeRoute.Substring(0, 5));
+                            {
+                                timeDateHelp = Convert.ToDateTime(timeRoute.Substring(0, 5));
+                                secondTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
+                                secondTimeRoute = TimeBeforeBusStop(secondTimeRoute, data.distanceAboutBusStop);
+                            }
                             data.allTime = this.MinutesBeforeDeparture(firstTimeRoute, secondTimeRoute);
                             break;
                         }
@@ -320,10 +334,16 @@ namespace RouteTimer
                         i+=6;
                     }
                 }
-                if (secondTimeRoute == DateTime.MinValue)
+                if (secondTimeRoute == TimeSpan.Zero)
                 {
-                    firstTimeRoute = Convert.ToDateTime(timeRoute.Substring(0, 5));
-                    secondTimeRoute = Convert.ToDateTime(timeRoute.Substring(7,5));
+                    timeDateHelp = Convert.ToDateTime(timeRoute.Substring(0, 5));
+                    firstTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
+                    firstTimeRoute = TimeBeforeBusStop(firstTimeRoute, data.distanceAboutBusStop);
+                    
+                    timeDateHelp = Convert.ToDateTime(timeRoute.Substring(7, 5));
+                    secondTimeRoute = new TimeSpan(timeDateHelp.Hour, timeDateHelp.Minute, 0);
+                    secondTimeRoute = TimeBeforeBusStop(secondTimeRoute, data.distanceAboutBusStop);
+                            
                     data.allTime = this.MinutesBeforeDeparture(firstTimeRoute, secondTimeRoute);
                 }
                 stringTimes [filledArraayElement] = data.numberRoute + "\t " + data.nameRoute + " \t" + data.allTime;
