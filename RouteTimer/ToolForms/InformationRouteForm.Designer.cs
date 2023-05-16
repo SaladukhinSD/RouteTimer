@@ -35,7 +35,7 @@
             // 
             // textBoxInformationRoute
             // 
-            this.textBoxInformationRoute.Location = new System.Drawing.Point(32, 66);
+            this.textBoxInformationRoute.Location = new System.Drawing.Point(35, 76);
             this.textBoxInformationRoute.Multiline = true;
             this.textBoxInformationRoute.Name = "textBoxInformationRoute";
             this.textBoxInformationRoute.Size = new System.Drawing.Size(321, 233);
@@ -44,7 +44,7 @@
             // comboBoxNumberRoute
             // 
             this.comboBoxNumberRoute.FormattingEnabled = true;
-            this.comboBoxNumberRoute.Location = new System.Drawing.Point(279, 22);
+            this.comboBoxNumberRoute.Location = new System.Drawing.Point(35, 38);
             this.comboBoxNumberRoute.Name = "comboBoxNumberRoute";
             this.comboBoxNumberRoute.Size = new System.Drawing.Size(74, 21);
             this.comboBoxNumberRoute.TabIndex = 6;
@@ -54,15 +54,15 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(32, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 7;
-            this.label1.Text = "label1";
+            this.label1.Text = "Enter number route";
             // 
             // InformationRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 323);
+            this.ClientSize = new System.Drawing.Size(387, 318);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxNumberRoute);
             this.Controls.Add(this.textBoxInformationRoute);

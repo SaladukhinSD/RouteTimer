@@ -32,12 +32,15 @@
             this.textBoxModifyRoute = new System.Windows.Forms.TextBox();
             this.buttonModifyRoute = new System.Windows.Forms.Button();
             this.listBoxInformationRoute = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxNumberRoute
             // 
             this.comboBoxNumberRoute.FormattingEnabled = true;
-            this.comboBoxNumberRoute.Location = new System.Drawing.Point(294, 34);
+            this.comboBoxNumberRoute.Location = new System.Drawing.Point(294, 48);
             this.comboBoxNumberRoute.Name = "comboBoxNumberRoute";
             this.comboBoxNumberRoute.Size = new System.Drawing.Size(189, 21);
             this.comboBoxNumberRoute.TabIndex = 0;
@@ -45,7 +48,7 @@
             // 
             // textBoxModifyRoute
             // 
-            this.textBoxModifyRoute.Location = new System.Drawing.Point(294, 77);
+            this.textBoxModifyRoute.Location = new System.Drawing.Point(294, 114);
             this.textBoxModifyRoute.Multiline = true;
             this.textBoxModifyRoute.Name = "textBoxModifyRoute";
             this.textBoxModifyRoute.Size = new System.Drawing.Size(189, 187);
@@ -53,7 +56,7 @@
             // 
             // buttonModifyRoute
             // 
-            this.buttonModifyRoute.Location = new System.Drawing.Point(294, 286);
+            this.buttonModifyRoute.Location = new System.Drawing.Point(294, 319);
             this.buttonModifyRoute.Name = "buttonModifyRoute";
             this.buttonModifyRoute.Size = new System.Drawing.Size(189, 46);
             this.buttonModifyRoute.TabIndex = 3;
@@ -64,17 +67,47 @@
             // listBoxInformationRoute
             // 
             this.listBoxInformationRoute.FormattingEnabled = true;
-            this.listBoxInformationRoute.Location = new System.Drawing.Point(12, 34);
+            this.listBoxInformationRoute.Location = new System.Drawing.Point(12, 49);
             this.listBoxInformationRoute.Name = "listBoxInformationRoute";
-            this.listBoxInformationRoute.Size = new System.Drawing.Size(248, 290);
+            this.listBoxInformationRoute.Size = new System.Drawing.Size(248, 316);
             this.listBoxInformationRoute.TabIndex = 4;
             this.listBoxInformationRoute.SelectedIndexChanged += new System.EventHandler(this.listBoxNumberRoute_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Choose data";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(291, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(108, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Choose number route";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(291, 86);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Edit data";
             // 
             // ModifyRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 352);
+            this.ClientSize = new System.Drawing.Size(508, 377);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxInformationRoute);
             this.Controls.Add(this.buttonModifyRoute);
             this.Controls.Add(this.textBoxModifyRoute);
@@ -92,5 +125,8 @@
         private System.Windows.Forms.TextBox textBoxModifyRoute;
         private System.Windows.Forms.Button buttonModifyRoute;
         private System.Windows.Forms.ListBox listBoxInformationRoute;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

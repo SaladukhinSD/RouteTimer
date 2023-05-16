@@ -44,6 +44,8 @@
             this.textBoxNumberRoute.Name = "textBoxNumberRoute";
             this.textBoxNumberRoute.Size = new System.Drawing.Size(223, 38);
             this.textBoxNumberRoute.TabIndex = 0;
+            this.textBoxNumberRoute.Enter += new System.EventHandler(this.textBoxNumberRoute_Enter);
+            this.textBoxNumberRoute.Leave += new System.EventHandler(this.textBoxNumberRoute_Leave);
             // 
             // textBoxAllTime
             // 
@@ -52,6 +54,8 @@
             this.textBoxAllTime.Name = "textBoxAllTime";
             this.textBoxAllTime.Size = new System.Drawing.Size(223, 306);
             this.textBoxAllTime.TabIndex = 4;
+            this.textBoxAllTime.Enter += new System.EventHandler(this.textBoxAllTime_Enter);
+            this.textBoxAllTime.Leave += new System.EventHandler(this.textBoxAllTime_Leave);
             // 
             // textBoxNameRoute
             // 
@@ -60,6 +64,8 @@
             this.textBoxNameRoute.Name = "textBoxNameRoute";
             this.textBoxNameRoute.Size = new System.Drawing.Size(223, 38);
             this.textBoxNameRoute.TabIndex = 5;
+            this.textBoxNameRoute.Enter += new System.EventHandler(this.textBoxNameRoute_Enter);
+            this.textBoxNameRoute.Leave += new System.EventHandler(this.textBoxNameRoute_Leave);
             // 
             // textBoxDirectionRoute
             // 
@@ -68,6 +74,8 @@
             this.textBoxDirectionRoute.Name = "textBoxDirectionRoute";
             this.textBoxDirectionRoute.Size = new System.Drawing.Size(223, 38);
             this.textBoxDirectionRoute.TabIndex = 6;
+            this.textBoxDirectionRoute.Enter += new System.EventHandler(this.textBoxDirectionRoute_Enter);
+            this.textBoxDirectionRoute.Leave += new System.EventHandler(this.textBoxDirectionRoute_Leave);
             // 
             // textBoxKindOfTransport
             // 
@@ -76,6 +84,8 @@
             this.textBoxKindOfTransport.Name = "textBoxKindOfTransport";
             this.textBoxKindOfTransport.Size = new System.Drawing.Size(223, 38);
             this.textBoxKindOfTransport.TabIndex = 7;
+            this.textBoxKindOfTransport.Enter += new System.EventHandler(this.textBoxKindOfTransport_Enter);
+            this.textBoxKindOfTransport.Leave += new System.EventHandler(this.textBoxKindOfTransport_Leave);
             // 
             // buttonAddRoute
             // 
@@ -94,6 +104,8 @@
             this.textBoxDistanceAboutBusStopRoute.Name = "textBoxDistanceAboutBusStopRoute";
             this.textBoxDistanceAboutBusStopRoute.Size = new System.Drawing.Size(223, 38);
             this.textBoxDistanceAboutBusStopRoute.TabIndex = 9;
+            this.textBoxDistanceAboutBusStopRoute.Enter += new System.EventHandler(this.textBoxDistanceAboutBusStopRoute_Enter);
+            this.textBoxDistanceAboutBusStopRoute.Leave += new System.EventHandler(this.textBoxDistanceAboutBusStopRoute_Leave);
             // 
             // AddRouteForm
             // 
