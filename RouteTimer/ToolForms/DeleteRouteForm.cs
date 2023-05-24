@@ -56,7 +56,7 @@ namespace RouteTimer
                     }
                 }
             }
-
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

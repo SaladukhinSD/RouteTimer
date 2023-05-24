@@ -70,7 +70,7 @@ namespace RouteTimer
             {
                 MessageBox.Show("Enter your speed or distance and minutes to overcome her!");
             }
-
+            this.DialogResult = DialogResult.OK;
         }
 
     }

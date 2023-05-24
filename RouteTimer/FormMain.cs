@@ -33,37 +33,33 @@ namespace RouteTimer
 
         private void ButtonAddRoute_Click(object sender, EventArgs e)
         {
+            
             AddRouteForm addRoute = new AddRouteForm();
-            addRoute.Owner = this;
-            addRoute.Show();
+            addRoute.ShowDialog(this);
         }
 
         private void buttonModifyRoute_Click(object sender, EventArgs e)
         {
             ModifyRouteForm modRoute = new ModifyRouteForm();
-            modRoute.Owner = this;
-            modRoute.Show();
+            modRoute.ShowDialog(this);
         }
 
         private void buttonDeliteRoute_Click(object sender, EventArgs e)
         {
             DeleteRouteForm delRoute = new DeleteRouteForm();
-            delRoute.Owner = this;
-            delRoute.Show();
+            delRoute.ShowDialog(this);
         }
 
         private void buttonInformationRoute_Click(object sender, EventArgs e)
         {
             InformationRouteForm infRoute = new InformationRouteForm();
-            infRoute.Owner = this;
-            infRoute.Show();
+            infRoute.ShowDialog(this);
         }
 
         private void buttonUserCharacteristics_Click(object sender, EventArgs e)
         {
             CharacteristicsUserForm charRoute = new CharacteristicsUserForm();
-            charRoute.Owner = this;
-            charRoute.Show();
+            charRoute.ShowDialog(this);
         }
     }
 }

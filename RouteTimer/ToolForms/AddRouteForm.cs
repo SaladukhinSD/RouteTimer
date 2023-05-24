@@ -33,7 +33,6 @@ namespace RouteTimer
 
         private void buttonAddRoute_Click(object sender, EventArgs e)
         {
-            //добавить подсказки для ввода и тект в окне
 
             string numberR, nameR, directionR, distanceR, kindOfTransportR, allTimeR;
             numberR = textBoxNumberRoute.Text.TrimStart('0', ' ');
